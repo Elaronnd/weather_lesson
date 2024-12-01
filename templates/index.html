@@ -3,15 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<p>Погода - {{ info.get('weather', 'Не вдалося отримати дані') }}</p>
-<p>Температура - {{ info.get('temp', 'Не вдалося отримати дані') }}</p>
-<p>Як відчувається - {{ info.get('fells_like', 'Не вдалося отримати дані') }}</p>
-<p>Назва міста - {{ info.get('city', 'Не вдалося отримати дані') }}</p>
-<p>Як далеко видно - {{ info.get('visibility', 'Не вдалося отримати дані') }}</p>
-<p>Швидкість вітру - {{ info.get('wind_speed', 'Не вдалося отримати дані') }}</p>
-<p>Напрямок вітру - {{ info.get('wind_deg', 'Не вдалося отримати дані') }}</p>
-<p>Хмарність - {{ info.get('clouds_all', 'Не вдалося отримати дані') }}</p>
+ <div class="container mt-5">
+        <h1 class="text-center">Weather App</h1>
+
+        <div class="row">
+            <!-- Display today's weather -->
+            <div class="col">
+                <h2 class="my-4">Today's Weather</h2>
+                <form action="/" method="post" class="my-4">
+                    <div class="form-group">
+                        <label for="location">Enter Location:</label>
+                        <input type="text" class="form-control" id="location" name="city" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Get Today's Weather</button>
+                </form>
+                {% if info %}
+                <div class="mt-4">
+                    <h3>Weather in {{ info.city }}</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">Weather: {{ info.weather }}</li>
+                        <li class="list-group-item">Temperature: {{ info.temp }}</li>
+                        <li class="list-group-item">Feels Like: {{ info.fells_like }}</li>
+                        <li class="list-group-item">Visibility: {{ info.visibility }}</li>
+                        <li class="list-group-item">Wind Speed: {{ info.wind_speed }}</li>
+                        <li class="list-group-item">Wind Direction: {{ info.wind_deg }}</li>
+                        <li class="list-group-item">Cloudiness: {{ info.clouds_all }}</li>
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>

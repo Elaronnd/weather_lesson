@@ -1,32 +1,36 @@
 import requests
 
 
-def get_weather_info(city: str):
-    appid = "key"
+def get_weather_json(city: str, endpoint: str = "weather"):
+    appid = "fb696f74063ae07dd7b08103d1f8b4d0"
     result = requests.get(
-        f"https://api.openweathermap.org/data/2.5/weather?q={city}&lang=ua&units=metric&appid={appid}"
+        f"https://api.openweathermap.org/data/2.5/{endpoint}?q={city}&lang=ua&units=metric&appid={appid}"
     )
     if result.status_code != 200:
         return {}
-    main_weather = result.json().get("weather")[0].get("main")
+    return result.json()
 
-    main = result.json().get("main")
+
+def get_weather_info_one(data):
+    main_weather = data.get("weather")[0].get("main")
+
+    main = data.get("main")
 
     main_temp = main.get("temp")
 
     main_fells_like = main.get("feels_like")
 
-    name = result.json().get("name")
+    name = data.get("name")
 
-    visibility = result.json().get("visibility")
+    visibility = data.get("visibility")
 
-    wind = result.json().get("wind")
+    wind = data.get("wind")
 
     wind_speed = wind.get("speed")
 
     wind_deg = wind.get("deg")
 
-    clouds = result.json().get("clouds")
+    clouds = data.get("clouds")
 
     clouds_all = clouds.get("all")
     json_weather = {
@@ -40,3 +44,10 @@ def get_weather_info(city: str):
         "clouds_all": f"{clouds_all}%"
     }
     return json_weather
+
+
+def get_weather_info_multi(data):
+    data = data.get("list")[0]
+    ...
+
+
