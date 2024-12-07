@@ -50,6 +50,8 @@ def get_weather_info_multi(data, days: int = 5):
     data = data.get("list")
     result = []
     date_weather = ""
+    if data is None:
+        return []
     for weather in data:
         dt_txt = weather.get("dt_txt")[0:10]
         if len(result) == days:

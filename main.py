@@ -17,8 +17,11 @@ def index():
 @app.route(rule="/days", methods=["GET", "POST"])
 def weather():
     city = request.form.get("city")
-    days = int(request.form.get("days", 5))
-    if not city or type(days) != int:
+    try:
+        days = int(request.form.get("days", 5))
+    except ValueError:
+        return render_template("days.html")
+    if not city:
         return render_template("days.html")
     json_api = get_weather_json(city=city, endpoint="forecast")
     return render_template("days.html",
