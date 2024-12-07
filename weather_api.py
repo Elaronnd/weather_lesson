@@ -12,6 +12,8 @@ def get_weather_json(city: str, endpoint: str = "weather"):
 
 
 def get_weather_info_one(data):
+    if data is None:
+        return []
     main_weather = data.get("weather")[0].get("main")
 
     main = data.get("main")
@@ -46,8 +48,19 @@ def get_weather_info_one(data):
     return json_weather
 
 
-def get_weather_info_multi(data):
-    data = data.get("list")[0]
-    ...
-
-
+def get_weather_info_multi(data, days: int = 5):
+    data = data.get("list")
+    result = []
+    date_weather = ""
+    if data is None:
+        return []
+    for weather in data:
+        dt_txt = weather.get("dt_txt")[0:10]
+        if len(result) == days:
+            break
+        elif date_weather != dt_txt:
+            info = get_weather_info_one(weather)
+            info["date_weather"] = dt_txt
+            result.append(info)
+            date_weather = dt_txt
+    return result
