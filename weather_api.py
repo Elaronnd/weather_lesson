@@ -12,6 +12,8 @@ def get_weather_json(city: str, endpoint: str = "weather"):
 
 
 def get_weather_info_one(data):
+    if data is None:
+        return []
     main_weather = data.get("weather")[0].get("main")
 
     main = data.get("main")

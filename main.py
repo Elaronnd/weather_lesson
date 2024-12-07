@@ -24,10 +24,10 @@ def weather():
     if not city:
         return render_template("days.html")
     json_api = get_weather_json(city=city, endpoint="forecast")
+    multiinfo = get_weather_info_multi(data=json_api,
+                                       days=days)
     return render_template("days.html",
-                           multiinfo=get_weather_info_multi(data=json_api,
-                                                            days=days),
+                           multiinfo=multiinfo,
                            city=city)
-
 
 app.run()
