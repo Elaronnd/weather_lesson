@@ -46,8 +46,18 @@ def get_weather_info_one(data):
     return json_weather
 
 
-def get_weather_info_multi(data):
-    data = data.get("list")[0]
-    ...
-
-
+def get_weather_info_multi(data, days: int = 5):
+    data = data.get("list")
+    result = []
+    date_weather = ""
+    for weather in data:
+        dt_txt = weather.get("dt_txt")[0:10]
+        if len(result) == days:
+            break
+        elif date_weather != dt_txt:
+            info = get_weather_info_one(weather)
+            info["date_weather"] = dt_txt
+            result.append(info)
+            date_weather = dt_txt
+    print(result)
+    return result
