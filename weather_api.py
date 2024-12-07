@@ -59,5 +59,4 @@ def get_weather_info_multi(data, days: int = 5):
             info["date_weather"] = dt_txt
             result.append(info)
             date_weather = dt_txt
-    print(result)
     return result

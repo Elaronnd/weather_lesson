@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from wether_api import get_weather_info_one, get_weather_json, get_weather_info_multi
+from weather_api import get_weather_info_one, get_weather_json, get_weather_info_multi
 
 app = Flask(__name__)
 
