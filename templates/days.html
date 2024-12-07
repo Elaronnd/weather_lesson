@@ -24,7 +24,7 @@
                 </form>
                 {% if multiinfo %}
                 <div class="mt-4">
-                    <h3>Weather in {{ multiinfo[0].city }}</h3>
+                    <h3>Weather in {{ city }}</h3>
                     {% for info in multiinfo %}
                     <h5>{{ info.date_weather }}</h5>
                         <ul class="list-group">

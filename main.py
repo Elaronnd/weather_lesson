@@ -17,11 +17,14 @@ def index():
 @app.route(rule="/days", methods=["GET", "POST"])
 def weather():
     city = request.form.get("city")
-    if not city:
+    days = int(request.form.get("days", 5))
+    if not city or type(days) != int:
         return render_template("days.html")
     json_api = get_weather_json(city=city, endpoint="forecast")
     return render_template("days.html",
-                           multiinfo=get_weather_info_multi(data=json_api))
+                           multiinfo=get_weather_info_multi(data=json_api,
+                                                            days=days),
+                           city=city)
 
 
 app.run()
